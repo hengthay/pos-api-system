@@ -23,29 +23,29 @@ class UserController extends Controller
         }
     }
 
-    public function show(User $user) {
+    public function show($id) {
         try {
             
-            $users = User::find($user);
+            $users = User::find($id);
 
             if(!$users) {
-                return $this->handleErrorResponse(null, "User with ID: " . $user . " is not found!", 404);
+                return $this->handleErrorResponse(null, "User with ID: " . $id . " is not found!", 404);
             }
 
-            return $this->handleResponse($users, "User with ID: " . $user . " is successful retrieve.");
+            return $this->handleResponse($users, "User with ID: " . $id . " is successful retrieve.");
         } catch (\Throwable $e) {
             return $this->handleErrorResponse(null, $e->getMessage(), 500);
         }
     }
 
-    public function update(Request $request, User $user) {
+    public function update(Request $request, $id) {
         try {
             
             // Query to find user by id
-            $user = User::find($user);
+            $user = User::find($id);
 
             if(!$user) {
-                return $this->handleErrorResponse(null, "User with ID: " . $user . ' is not found to update.', 404);
+                return $this->handleErrorResponse(null, "User with ID: " . $id . ' is not found to update.', 404);
             }
 
             $user->update([
@@ -61,13 +61,13 @@ class UserController extends Controller
         }
     }
 
-    public function delete(User $user) {
+    public function delete($id) {
         try {
             
-            $findUser = User::find($user);
+            $findUser = User::find($id);
 
             if(!$findUser) {
-                return $this->handleErrorResponse(null, "User with ID: " . $user . ' is not found to delete.', 404);
+                return $this->handleErrorResponse(null, "User with ID: " . $id . ' is not found to delete.', 404);
             }
 
             $findUser->update([

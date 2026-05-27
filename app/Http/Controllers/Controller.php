@@ -32,7 +32,7 @@ abstract class Controller
      * @param  int $code HTTP status code (default 404).
      * @return JsonResponse
      */
-    public function handleErrorResponse(mixed $data = [], string $message = "", int $code = 400) : JsonResponse {
+    public function handleErrorResponse(mixed $data = [], string $message = "", int $code = 500) : JsonResponse {
         $response = [
             'success' => false,
             'data' => $data,

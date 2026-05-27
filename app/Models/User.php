@@ -7,13 +7,12 @@ use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Hidden;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
-#[Fillable(['name', 'email', 'password'])]
-#[Hidden(['password', 'remember_token'])]
 class User extends Authenticatable implements JWTSubject
 {
     /** @use HasFactory<UserFactory> */
@@ -63,4 +62,20 @@ class User extends Authenticatable implements JWTSubject
     {
         return [];
     }
+
+    public function sales(): HasMany { 
+        return $this->hasMany(Sales::class, 'user_id');
+     }
+    public function purchases(): HasMany {
+        return $this->hasMany(Purchases::class, 'created_by');
+     }
+    public function expenses(): HasMany { 
+        return $this->hasMany(Expenses::class, 'created_by');
+     }
+    public function inventoryTransactions(): HasMany { 
+        return $this->hasMany(InventoryTransactions::class, 'created_by');
+     }
+    public function auditLogs(): HasMany { 
+        return $this->hasMany(AuditLogs::class, 'user_id');
+     }
 }
