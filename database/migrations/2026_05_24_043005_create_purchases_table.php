@@ -20,6 +20,7 @@ return new class extends Migration
             $table->enum('status', ['pending', 'received', 'cancelled'])->default('pending');
             $table->foreignId('created_by')->nullable()->constrained('users')->nullOnDelete();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

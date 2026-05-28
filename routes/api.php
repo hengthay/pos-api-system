@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\ProductsController;
+use App\Http\Controllers\SuppliersController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -25,7 +26,7 @@ Route::middleware(['jwt.cookie', 'role:admin,manager,cashier'])->group(function 
 });
 
 // Admin route and manager
-Route::middleware(['jwt.cookie', 'role:admin'])->group(function (){
+Route::middleware(['jwt.cookie', 'role:admin,manager'])->group(function (){
 
     Route::controller(UserController::class)->prefix('users')->group(function () {
         Route::get('/', 'index');
@@ -41,6 +42,14 @@ Route::middleware(['jwt.cookie', 'role:admin'])->group(function (){
     });
 
     Route::controller(ProductsController::class)->prefix('products')->group(function (){
+        Route::post('/', 'create');
+        Route::put('/{id}', 'update');
+        Route::delete('/{id}', 'delete');
+    });
+
+    Route::controller(SuppliersController::class)->prefix('suppliers')->group(function (){
+        Route::get('/', 'index');
+        Route::get('/{id}', 'show');
         Route::post('/', 'create');
         Route::put('/{id}', 'update');
         Route::delete('/{id}', 'delete');

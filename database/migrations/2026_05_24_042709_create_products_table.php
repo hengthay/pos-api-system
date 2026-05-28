@@ -23,6 +23,7 @@ return new class extends Migration
             $table->text("description")->nullable();
             $table->foreignId('category_id')->nullable()->constrained('categories')->nullOnDelete();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

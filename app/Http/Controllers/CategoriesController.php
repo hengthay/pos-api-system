@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CategoryRequest;
 use App\Models\Categories;
+use Illuminate\Support\Facades\Log;
 
 class CategoriesController extends Controller
 {
@@ -43,6 +44,10 @@ class CategoriesController extends Controller
             $category = Categories::create([
                 "category_name" => $request->category_name,
                 "description" => $request->description
+            ]);
+
+            Log::debug("category", [
+                "category" => $category
             ]);
 
             if (!$category->wasRecentlyCreated) { 

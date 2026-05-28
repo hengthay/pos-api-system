@@ -25,12 +25,12 @@ class ProductRequest extends FormRequest
     {
         return [
             "product_name" => "required|string|max:100",
-            "product_code" => [
-                                "required",
-                                "string",
-                                "max:40",
-                                Rule::unique("products", "product_code")->ignore($this->route("product")),
-                            ],
+            // "product_code" => [
+            //                     "required",
+            //                     "string",
+            //                     "max:40",
+            //                     Rule::unique("products", "product_code")->ignore($this->route("product")),
+            //                 ],
             "brand" => "nullable|string|max:100",
             "cost_price" => "required|numeric|min:0",
             "selling_price" => "required|numeric|min:0",

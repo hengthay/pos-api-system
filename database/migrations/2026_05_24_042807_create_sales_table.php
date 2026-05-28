@@ -24,6 +24,7 @@ return new class extends Migration
             $table->enum("payment_status", ["unpaid", "partial", "paid", "refunded"])->default("unpaid");
             $table->dateTime("sale_date");
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
