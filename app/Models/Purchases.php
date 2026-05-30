@@ -14,6 +14,10 @@ class Purchases extends Model
 
     protected $fillable = ["supplier_id", "invoice_no", "total_amount", "purchase_date", "status", "created_by"];
 
+    protected $casts = [
+        "purchase_date" => "datetime"
+    ];
+
     // Purchase belongs to a supplier
     public function supplier(): BelongsTo
     {
@@ -29,7 +33,7 @@ class Purchases extends Model
     // Purchase has many line items
     public function purchaseItems(): HasMany
     {
-        return $this->hasMany(PurchaseItem::class);
+        return $this->hasMany(PurchaseItem::class, 'purchase_id');
     }
 
     // Purchase has many inventory movements
@@ -41,7 +45,7 @@ class Purchases extends Model
     // Purchase has many products (via purchase_items)
     public function products(): BelongsToMany
     {
-        return $this->belongsToMany(Products::class, 'purchase_items')
+        return $this->belongsToMany(Products::class, 'purchase_items', 'purchase_id')
                     ->withPivot('quantity', 'cost_price', 'total');
     }
 }

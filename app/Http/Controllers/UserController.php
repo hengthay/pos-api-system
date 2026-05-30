@@ -52,7 +52,8 @@ class UserController extends Controller
                 "name" => $request->name,
                 "password" => Hash::make($request->password),
                 "email" => $request->email,
-                "status" => $request->status
+                "status" => $request->status,
+                "role" => $request->role
             ]);
 
             return $this->handleResponse($user, "User updated successfully.", 201);

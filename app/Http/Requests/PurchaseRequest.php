@@ -25,8 +25,7 @@ class PurchaseRequest extends FormRequest
     {
         return [
             "supplier_id" => "required|integer|exists:suppliers,id",
-            "invoice_no" => "required|string|max:30",
-            "total_amount" => "required|numeric|min:0",
+            // "total_amount" => "required|numeric|min:0",
             "purchase_date" => "required|date",
             "status" => "required|in:pending,received,cancelled",
         ];

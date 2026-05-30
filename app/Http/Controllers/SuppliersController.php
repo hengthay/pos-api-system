@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\SupplierRequest;
 use App\Models\Suppliers;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
 class SuppliersController extends Controller
