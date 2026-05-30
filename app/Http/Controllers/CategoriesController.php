@@ -54,7 +54,7 @@ class CategoriesController extends Controller
                 return $this->handleErrorResponse(null, "Unable to create category.", 500);
             }
 
-            return $this->handleResponse($category, "Category created successfully.");
+            return $this->handleResponse($category, "Category created successfully.", 201);
         } catch (\Throwable $e) {
             return $this->handleErrorResponse(null, $e->getMessage(), 500);
         }
@@ -74,7 +74,7 @@ class CategoriesController extends Controller
                 "description" => $request->description
             ]);
 
-            return $this->handleResponse($category, "Category updated successfully.", 201);
+            return $this->handleResponse($category, "Category updated successfully.", 200);
         } catch (\Throwable $e) {
             return $this->handleErrorResponse(null, $e->getMessage(), 500);
         }
@@ -91,7 +91,7 @@ class CategoriesController extends Controller
 
             $category->delete();
 
-            return $this->handleResponse(null, "Category deleted successfully.", 203);
+            return $this->handleResponse(null, "Category deleted successfully.", 204);
         } catch (\Throwable $e) {
             return $this->handleErrorResponse(null, $e->getMessage(), 500);
         }

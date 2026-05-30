@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoriesController;
+use App\Http\Controllers\CustomersController;
 use App\Http\Controllers\InventoryTransactionsController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\PurchaseItemsController;
@@ -40,6 +41,14 @@ Route::middleware(['jwt.cookie', 'role:admin,manager,cashier'])->group(function 
     Route::controller(InventoryTransactionsController::class)->prefix('inventory-transactions')->group(function (){
         Route::get('/', 'index');
         Route::get('/{id}', 'show');
+    });
+
+    Route::controller(CustomersController::class)->prefix('customers')->group(function (){
+        Route::get('/', 'index');
+        Route::get('/{id}', 'show');
+        Route::post('/', 'create');
+        Route::put('/{id}', 'update');
+        Route::delete('/{id}', 'delete');
     });
 });
 
